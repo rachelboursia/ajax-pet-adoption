@@ -40,7 +40,7 @@
    <div><input type="submit" value="submit it!" /></div>
 </form>
 </div>
-<p><a href="index.php">RESET</a></p>
+<p><a href="index.php">RESET</a></p> 
 <script>
     $("document").ready(function(){
         
@@ -65,18 +65,36 @@
             let likes = $("input[name=likes]:checked").val();
             let eats = $("input[name=eats]:checked").val();
             let pet = "ERROR";
-            let output = "";
+            var output = "";
 
+          //135
             if(feels == "fluffy" && likes == "petted" && eats == "carrots"){
               pet ="rabbit";
             }
+
+          //246
+            if(feels == "scaly" && likes == "ridden" && eats == "pets"){
+              pet ="velociraptor";
+            }  
+
             output += `<p>Your pet is a ${pet}.</p>`;
             output += `<p>Your pet feels ${feels}.</p>`;
             output += `<p>Your pet likes to be ${likes}.</p>`;
             output += `<p>Your pet likes to eat ${eats}.</p>`;
             //alert(feels);
-            //output submitted info and replace form
-            $('#output').html(output);
+
+            $.get( "includes/get_pet.php", { critter: pet} ) .done(function( data ) {
+            //alert( "Data Loaded: " + data );
+
+               //output submitted info and replace form
+            $('#output').html(data + output);
+           })
+           .fail(function(xhr, status, error) {
+             //Ajax request failed.
+             var errorMessage = xhr.status + ': ' + xhr.statusText
+             alert('Error - ' + errorMessage);
+           });
+
         });
 
     });
