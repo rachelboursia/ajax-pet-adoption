@@ -116,7 +116,7 @@
            if(feels == "scaly" && likes == "ridden" && eats == "pets"){
              pet = "velociraptor";
             }
-            output += `<p>Your pets name is ${name}.</p>`;
+            output += `<p>Your pet's name is ${name}.</p>`;
             output += `<p>Your pet is a ${pet}.</p>`;
             output += `<p>Your pet feels ${feels}.</p>`;
             output += `<p>Your pet likes to be ${likes}.</p>`;
